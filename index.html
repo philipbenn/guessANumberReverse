@@ -16,10 +16,11 @@
     <div class="container mt-5">
         <h1>Guess A Number</h1>
         <div id="guess-display" class="mb-3">Guess a number between 1 & 100</div>
+        <ul id="guess-list" class="mb-3"></ul>
         <div id="computer-guess" class="mb-3"></div>
         <div id="buttons" class="mb-3">
-            <button class="btn btn-primary" onclick="checkGuess('low')">Too Low</button>
-            <button class="btn btn-primary" onclick="checkGuess('high')">Too High</button>
+            <button class="btn btn-primary" onclick="checkGuess('higher')">Too Low</button>
+            <button class="btn btn-primary" onclick="checkGuess('lower')">Too High</button>
             <button class="btn btn-success" onclick="checkGuess('correct')">Correct!</button>
         </div>
     </div>
