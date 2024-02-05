@@ -1,20 +1,26 @@
 var start = 0;
 var end = 100;
 var middle;
+var isFirstGuess = true;
 var guessList = document.getElementById('guess-list');
 
 function getGuess(min, max) {
-    return Math.floor((min + max) / 2);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function makeGuess() {
-
     if (start > end) {
         alert('The only remaining possibility is ' + start + '. Computer will not continue guessing.');
         return;
     }
 
-    middle = getGuess(start, end);
+    if (isFirstGuess) {
+        middle = getGuess(40, 60);
+        isFirstGuess = false;
+    } else {
+        middle = getGuess(start, end);
+    }
+
     document.getElementById('computer-guess').innerText = 'Computer is guessing: ' + middle;
 
     var listItem = document.createElement('li');
@@ -54,7 +60,8 @@ function checkGuess(result) {
 
         start = 0;
         end = 100;
-        
+        isFirstGuess = true;
+
         makeGuess();
         return;
     }
