@@ -1,18 +1,24 @@
-var min = 1;
-var max = 100;
-var computerGuess;
+var start = 0;
+var end = 100;
+var middle;
 var guessList = document.getElementById('guess-list');
 
-function getRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+function getGuess(min, max) {
+    return Math.floor((min + max) / 2);
 }
 
 function makeGuess() {
-    computerGuess = getRandomNumber(min, max);
-    document.getElementById('computer-guess').innerText = 'Computer is guessing: ' + computerGuess;
+
+    if (start > end) {
+        alert('The only remaining possibility is ' + start + '. Computer will not continue guessing.');
+        return;
+    }
+
+    middle = getGuess(start, end);
+    document.getElementById('computer-guess').innerText = 'Computer is guessing: ' + middle;
 
     var listItem = document.createElement('li');
-    listItem.textContent = 'Computer guessed ' + computerGuess;
+    listItem.textContent = 'Computer guessed ' + middle;
 
     guessList.appendChild(listItem);
 }
@@ -35,16 +41,20 @@ document.getElementById('correctBtn').addEventListener('click', function() {
 
 function checkGuess(result) {
     if (result === 'higher') {
-        min = computerGuess + 1;
+        start = middle + 1;
     } else if (result === 'lower') {
-        max = computerGuess - 1;
+        end = middle - 1;
     } else if (result === 'correct') {
         var listItem = document.createElement('li');
-        listItem.textContent = 'Computer guessed ' + computerGuess + ', which was correct.';
+        listItem.textContent = 'Computer guessed ' + middle + ', which was correct.';
         guessList.appendChild(listItem);
 
         alert('Correct! The Computer guessed the number.');
         clearGuessList();
+
+        start = 0;
+        end = 100;
+        
         makeGuess();
         return;
     }
