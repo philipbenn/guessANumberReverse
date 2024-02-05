@@ -21,6 +21,18 @@ function clearGuessList() {
     guessList.innerHTML = '';
 }
 
+document.getElementById('tooLowBtn').addEventListener('click', function() {
+    checkGuess('higher');
+});
+
+document.getElementById('tooHighBtn').addEventListener('click', function() {
+    checkGuess('lower');
+});
+
+document.getElementById('correctBtn').addEventListener('click', function() {
+    checkGuess('correct');
+});
+
 function checkGuess(result) {
     if (result === 'higher') {
         min = computerGuess + 1;
@@ -30,7 +42,7 @@ function checkGuess(result) {
         var listItem = document.createElement('li');
         listItem.textContent = 'Computer guessed ' + computerGuess + ', which was correct.';
         guessList.appendChild(listItem);
-        
+
         alert('Correct! The Computer guessed the number.');
         clearGuessList();
         makeGuess();
